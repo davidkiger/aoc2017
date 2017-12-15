@@ -35,25 +35,31 @@ for line in file:
 
 x = 0
 y = 0
+max_dist = 0
 for step in steps:
     x, y = move(x, y, step)
 
-count = 0
-while not (x == 0 and y == 0):
-    if x == 0:
-        if y > 0:
-            x, y = move(x, y, 'n')
-        else:
-            x, y = move(x, y, 's')
-    elif x >= 0 and y >= 0:
-        x, y = move(x, y, 'nw')
-    elif x >= 0 and y < 0:
-        x, y = move(x, y, 'sw')
-    elif x < 0 and y >= 0:
-        x, y = move(x, y, 'ne')
-    elif x < 0 and y < 0:
-        x, y = move(x, y, 'se')
+    count = 0
+    dist_x = x
+    dist_y = y
+    while not (dist_x == 0 and dist_y == 0):
+        if dist_x == 0:
+            if dist_y > 0:
+                dist_x, dist_y = move(dist_x, dist_y, 'n')
+            else:
+                dist_x, dist_y = move(dist_x, dist_y, 's')
+        elif dist_x >= 0 and dist_y >= 0:
+            dist_x, dist_y = move(dist_x, dist_y, 'nw')
+        elif dist_x >= 0 and dist_y < 0:
+            dist_x, dist_y = move(dist_x, dist_y, 'sw')
+        elif dist_x < 0 and dist_y >= 0:
+            dist_x, dist_y = move(dist_x, dist_y, 'ne')
+        elif dist_x < 0 and dist_y < 0:
+            dist_x, dist_y = move(dist_x, dist_y, 'se')
 
-    count += 1
+        count += 1
 
-print(count)
+    if count > max_dist:
+        max_dist = count
+
+print(max_dist)
